@@ -1,0 +1,19 @@
+.container{
+    box-sizing: border-box;
+}
+
+h1{
+    color:darkgreen;
+}
+
+#B-bot{
+    height: 20rem;
+    width: 50%;
+}
+
+img{
+    width: 30%;
+    height: 47%;
+}
+
+
