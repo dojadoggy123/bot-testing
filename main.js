@@ -24,3 +24,6 @@ console.log(cookies)
 
 // pva_jopUEClWPD     (same user id for device, go check on other device)
 // pva_jopUEClWPD
+
+// local Storage
+// clientId: "96ff4394-9197-43aa-b393-6a41652e21f8"
