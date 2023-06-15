@@ -6,13 +6,13 @@ let data = {
 console.log(data);
 localStorage.setItem('user',JSON.stringify(data));
 
-
+ 
 // retrieve user id from local storage. Go check with other devices
 let user_id = localStorage.getItem("https://web.powerva.microsoft.com/")
 if (user_id) {
     var parsedData = JSON.parse(data);
     console.log(parsedData);
-  } else {
+  } else { 
     console.log('No data found');
   }
 
