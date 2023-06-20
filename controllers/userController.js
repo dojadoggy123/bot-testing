@@ -3,16 +3,12 @@ const userModel = require("../models/userModel")   // connect to database in use
 // controllers for user requests
 
 const getHome = (req, res)=>{
-    res.render("homeView", {text: "this is a variable being rendered"})
+    res.render("homeView", {text: "*this is a variable being rendered*"})
 }
 
 const getUser = async(req,res)=>{
-    try {
-        const userInfo = await userModel.find({})
-        res.status(200).json(userInfo)
-    } catch (error) { 
-        console.log(error.messsage)
-    }
+    const userInfo = await userModel.find({})
+    res.status(200).json(userInfo)
 }
 
 // post request for user id 
