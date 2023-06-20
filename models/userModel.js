@@ -2,13 +2,23 @@ const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
 {
-        user_id: {
+        conversation_id: {
             type: String,
-            required: [true, "id must be entered here"]
+            required: [false, "id must be entered here"],
+            default: null
         },
-        content: {
+        email: {
             type: String,
             required: true
+        },
+        name:{
+            type: String,
+            required: false
+        },
+        content:{
+            type: String,
+            required: false,
+            default: null
         }
     },
     {
