@@ -13,18 +13,19 @@ app.use(express.urlencoded({ extended: true }));    //allow complex object & arr
 app.use('/', require('./routes/userRoute'))
 app.use('/', require('./routes/emailRoute'))
 
+
 // connect to mongoDB
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
     console.log("Connected to DB!")
 })
 .catch(()=>{
-    console.log("App is running!")
+    console.log("Couldn't connect to DB!")
 })
 
 // run app on PORT 3000
 const PORT = process.env.PORT || 3000
 app.listen(PORT, ()=>{
-    console.log("App is running on PORT")
+    console.log("App is running")
 })
 
