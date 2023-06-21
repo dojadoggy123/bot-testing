@@ -8,6 +8,7 @@ router.route('/email')
 
 router.route('/email/:address')
     .get(emailController.getEmailAdd)
+    .delete(emailController.deleteEmailAdd)
 
 router.route('/email/OTP/:address')
     .get(emailController.checkEmailAdd)   //Checks whether email address exists in db , & send OTP
