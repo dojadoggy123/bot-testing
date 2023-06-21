@@ -1,6 +1,9 @@
 const userModel = require("../models/userModel")   // connect to database in userModel
 const otpGenerator = require('otp-generator')
 
+// initialize variables
+let OTP
+
 // controller for email requests
 const getEmail = async (req, res)=>{
     try {
@@ -11,26 +14,26 @@ const getEmail = async (req, res)=>{
     }
 }
 
-const getEmailID = async (req, res)=>{
+const getEmailAdd = async (req, res)=>{
     try{
-        const {id} = req.params
-        const userInfo = await userModel.find({email:id})
+        const {address} = req.params
+        const userInfo = await userModel.find({email:address})
         res.status(200).json(userInfo)
     } catch (error){
         res.status(400).json({message:error})
     }
 }
 
-const postEmailID = async (req, res)=>{
+const checkEmailAdd = async (req, res)=>{
     try {
-        const {id} = req.params
+        const {address} = req.params
         // check if email address already exists in db
-        await userModel.findOne({email: id}).then(result =>{
+        await userModel.findOne({email: address}).then(result =>{
             if (result){
-                res.status(200).json("user already exists")
+                console.log(exists)
+                res.json({"exist": true})
             }else{
-                res.status(200).json("an OTP will be sent to your email to confirm your address. Your OTP is "+getOTP()) //send OTP to validate email address
-                userModel.create(req.body)
+                res.json({"exists": false, "OTP": getOTP()}) //send OTP to validate email address
             }
         })
     }
@@ -40,16 +43,25 @@ const postEmailID = async (req, res)=>{
     }
 }
 
+const postEmailAdd = async (req, res)=>{
+    const {req_OTP}=req.params
+    if (req_OTP == OTP){
+        await userModel.create(req.body)    //create email in DB
+        res.json({response: "your email has been created"})
+    }
+}
+
 
 // function to generate OTP 
 function getOTP(){
-    const OTP = otpGenerator.generate(6, {upperCaseAlphabets: false, specialChars: false})
+    OTP = otpGenerator.generate(6, {upperCaseAlphabets: true, specialChars: false})
     return OTP
 }
 
 
 module.exports = {
     getEmail,
-    getEmailID,
-    postEmailID
+    getEmailAdd,
+    checkEmailAdd,
+    postEmailAdd
 }

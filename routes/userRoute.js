@@ -4,7 +4,7 @@ const router = express.Router()
 
 // routes for user requests
 
-router.route('/home')   //note: change back to '/'
+router.route('/')   //home page
     .get(userController.getHome)
 
 router.route('/user')

@@ -6,9 +6,12 @@ const router = express.Router()
 router.route('/email')    
     .get(emailController.getEmail)
 
-router.route('/email/:id')
-    .get(emailController.getEmailID)
-    .post(emailController.postEmailID)
+router.route('/email/:address')
+    .get(emailController.getEmailAdd)
+
+router.route('/email/otp/:address')
+    .get(emailController.checkEmailAdd)   //Checks whether email address exists in db , & send OTP
+    .post(emailController.postEmailAdd)
 
 
 module.exports = router
