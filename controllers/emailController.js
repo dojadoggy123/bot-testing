@@ -31,7 +31,7 @@ const checkEmailAdd = async (req, res)=>{
         await userModel.findOne({email: address}).then(result =>{
             if (result){
                 console.log(exists)
-                res.json({"exist": true})
+                res.json({"exist": true, "OTP": null})
             }else{
                 res.json({"exists": false, "OTP": getOTP()}) //send OTP to validate email address
             }
@@ -44,9 +44,10 @@ const checkEmailAdd = async (req, res)=>{
 }
 
 const postEmailAdd = async (req, res)=>{
-    const {req_OTP}=req.params
+    const {address} = req.params
+    const {req_OTP} = req.query
     if (req_OTP == OTP){
-        await userModel.create(req.body)    //create email in DB
+        await userModel.create({"email": address})    //create email in DB
         res.json({response: "your email has been created"})
     }
 }
