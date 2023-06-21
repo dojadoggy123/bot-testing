@@ -18,14 +18,16 @@ app.use('/', require('./routes/emailRoute'))
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
     console.log("Connected to DB!")
+
+    // run app on PORT 3000
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, ()=>{
+        console.log("App is running")
+    })
 })
-.catch(()=>{
-    console.log("Couldn't connect to DB!")
+.catch((error)=>{
+    console.log("Couldn't connect to DB!"+ error)
 })
 
-// run app on PORT 3000
-const PORT = process.env.PORT || 3000
-app.listen(PORT, ()=>{
-    console.log("App is running")
-})
+
 

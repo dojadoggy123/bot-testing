@@ -38,15 +38,16 @@ const putUser = async(req,res)=>{
 }
 
 const deleteUser = async(req,res)=>{
+    try{
         const {id} = req.params
         const userInfo = await userModel.findByIdAndDelete(id)
-    //     if (!userInfo){
-    //         return res.status(404).json({message: `cannot find user with id ${id}`})
-    //     }
+        if (!userInfo){
+            return res.status(404).json({message: `cannot find user with id ${id}`})
+        }
         res.status(200).json(userInfo)
-    // } catch (error) {
-    //     console.log(error.message)
-    // }
+    }catch (error) {
+        console.log(error.message)
+    }
 }
 
 module.exports = {
