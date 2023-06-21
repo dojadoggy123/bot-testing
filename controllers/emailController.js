@@ -10,7 +10,7 @@ const getEmail = async (req, res)=>{
         const userInfo = await userModel.find({}) 
         res.status(200).json(userInfo)
     } catch (error) { 
-        res.status(400).json({message:error})
+        res.status(400).json({message: error.message})
     }
 }
 
@@ -20,7 +20,7 @@ const getEmailAdd = async (req, res)=>{
         const userInfo = await userModel.find({email:address})
         res.status(200).json(userInfo)
     } catch (error){
-        res.status(400).json({message:error})
+        res.status(400).json({message: error.message})
     }
 }
 
@@ -30,7 +30,6 @@ const checkEmailAdd = async (req, res)=>{
         // check if email address already exists in db
         await userModel.findOne({email: address}).then(result =>{
             if (result){
-                console.log(exists)
                 res.json({"exist": true, "OTP": null})
             }else{
                 res.json({"exists": false, "OTP": getOTP()}) //send OTP to validate email address
@@ -38,17 +37,18 @@ const checkEmailAdd = async (req, res)=>{
         })
     }
     catch (error) {
-        console.log("there is an error\n")
-        res.status(400).json({message:error})
+        res.status(400).json({message: error.message})
     }
 }
 
 const postEmailAdd = async (req, res)=>{
     const {address} = req.params
     const {req_OTP} = req.query
-    if (req_OTP == OTP){
+    if (req_OTP == OTP){    //verify user entered correct OTP
+        console.log("it is pending to be posted")
         await userModel.create({"email": address})    //create email in DB
         res.json({response: "your email has been created"})
+        getOTP()   // resets OTP to random
     }
 }
 
