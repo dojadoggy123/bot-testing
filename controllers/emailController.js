@@ -46,13 +46,13 @@ const checkEmailAdd = async (req, res)=>{
 const postEmailAdd = async (req, res)=>{
     try{
         const {address} = req.params
-        const req_otp = req.query.otp
+        const {req_otp, name }= req.query
         console.log("-----------------------------------")
         console.log("global var from postEmail is " + OTP)
-        console.log("emai is "+address)
+        console.log("emai is "+ address)
         console.log("req_OTP is " +req_otp)
         if (req_otp == OTP){    //verify user entered correct OTP
-            await userModel.create({"email": address})    //create email in DB
+            await userModel.create({"email": address, "name": name})    //create email in DB
             res.status(200).json({response: "your email has been created"})
             getOTP()   // resets OTP to random
         }
