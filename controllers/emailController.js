@@ -33,7 +33,6 @@ const checkEmailAdd = async (req, res)=>{
                 res.json({"exist": true, "OTP": null})
             }else{
                 res.json({"exists": false, "OTP": getOTP()}) //send OTP to validate email address
-
                 console.log("global var from getEmail is " + OTP)
             }
         })
@@ -47,14 +46,16 @@ const postEmailAdd = async (req, res)=>{
     try{
         const {address} = req.params
         const {req_otp, req_name} = req.query
-        console.log("-----------------------------------")
-        console.log("global var from postEmail is " + OTP)
-        console.log("emai is "+ address)
-        console.log("req_OTP is " +req_otp +" query name is "+req_name)
+        console.log('------------------------------------------')
+        console.log("req_otp is "+req_otp)
+
         if (req_otp == OTP){    //verify user entered correct OTP
             const user = await userModel.create({"email": address, "name": req_name})    //create email in DB
             res.status(200).json({response: "your email has been created", 'user': user})
-            getOTP()   // resets OTP to random
+            // send session back to client after authenticated
+            req.session.authenticated = true   
+            req.session.user = {address}
+            getOTP()   // resets OTP
         }
         else{
             res.json("wrong OTP")
@@ -74,19 +75,17 @@ const deleteEmailAdd = async (req, res)=>{
         }
         res.status(200).json(userInfo)
     }catch (error) {
-        console.log(error.message)
+        res.status(400).json(error.message)
     }
 }
-
 
 
 // function to generate OTP 
 function getOTP(){
     OTP = otpGenerator.generate(6, {upperCaseAlphabets: true, specialChars: false})
-    console.log("function geenrated otp is " + OTP)
+    // console.log("function geenrated otp is " + OTP)
     return OTP
 }
-
 
 module.exports = {
     getEmail,

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- GET Request Form -->
+        <form method="GET" action="/check-email/{{email}}">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            <br>
+            <button type="submit">Check Email</button>
+        </form>
+
+        <!-- POST Request Form -->
+        <form method="POST" action="/post-email/{{email}}">
+            <label for="otp">OTP:</label>
+            <input type="text" id="otp" name="req_otp" required>
+            <br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="req_name" required>
+            <br>
+            <button type="submit">Submit Email</button>
+        </form>
+    </body>
+</html>
