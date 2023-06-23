@@ -1,6 +1,5 @@
 const express = require('express')
 const session = require('express-session')
-const RedisStore = require('connect-redis')(session)
 const app = express()  //create express app
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')  
@@ -16,10 +15,6 @@ app.use(express.urlencoded({ extended: true }));    //allow complex object & arr
 app.use(
     // session middleware
     session({
-        store: new RedisStore({
-            host: process.env.REDIS_HOST,
-            port: provess.env.REDIS_PORT
-        }),
         secret: process.env.SESSION_SECRET,
         resave: false,
         cookie: {maxAge: 25000},   // 7 days in milliseconds 7*24*60*60*1000
