@@ -3,6 +3,7 @@ const otpGenerator = require('otp-generator')
 
 // initialize variables
 let OTP
+let user_content = []
 
 // controller for email requests
 const getEmail = async (req, res)=>{
@@ -78,19 +79,30 @@ const deleteEmailAdd = async (req, res)=>{
         res.status(400).json(error.message)
     }
 }
-
+// controllers for saving user chat transcript into database
+const postTranscript = async (req, res)=>{
+    try {
+        const message = req.body
+        user_content.push(message)
+        res.json({"chat transcript": user_content})
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+}
 
 // function to generate OTP 
 function getOTP(){
     OTP = otpGenerator.generate(6, {upperCaseAlphabets: true, specialChars: false})
-    // console.log("function geenrated otp is " + OTP)
     return OTP
 }
 
 module.exports = {
+    // email controllers
     getEmail,
     getEmailAdd,
     checkEmailAdd,
     postEmailAdd,
-    deleteEmailAdd
+    deleteEmailAdd,
+    // chat transcript controllers
+    postTranscript
 }

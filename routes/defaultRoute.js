@@ -1,11 +1,14 @@
 const express = require('express')
-const userController = require('../controllers/defaultController')
+const defaultController = require('../controllers/defaultController')
 const router = express.Router()
 
 // routes for user requests
 
 router.route('/')   //home page
-    .get(userController.getHome)
+    .get(defaultController.getHome)
+
+router.route('/sign_in')
+    .get(defaultController.getSignIn)
 
 
 

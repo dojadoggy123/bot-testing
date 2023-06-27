@@ -12,11 +12,6 @@
         <script src="/js/client.js"></script>
     </head>
     <body>
-        <!-- clientId
-id: id
-: 
-"pva_wn4GoUh04p"
-"96ff4394-9197-43aa-b393-6a41652e21f8 -->
         <div class="container">
             <div class="row">
                 <div class="col-7">    
@@ -29,10 +24,17 @@ id: id
                         <li>authenticating user</li>
                     </ul>
                 </div>
+                <div class="col">
+                    <button>
+                        <a href="/sign_in" id="sign_in">Sign In</a>
+                    </button>
+                </div>
             </div>
             <div class="row-cols-sm-auto row">
                 <div class="col">
-                    <iframe  id="B-bot" src="https://web.powerva.microsoft.com/environments/Default-a217cd4c-bf19-42bd-a303-270526a07d00/bots/cr0ad_wallE/webchat?__version__=2" frameborder="0"></iframe>
+                    <!-- Add a button to refresh the chat bot -->
+                    <button id="refreshChatBot">Refresh Chat Bot</button>
+                    <iframe id="B-bot" src="https://web.powerva.microsoft.com/environments/Default-a217cd4c-bf19-42bd-a303-270526a07d00/bots/cr0ad_wallE/webchat?__version__=2" frameborder="0"></iframe>
                 </div>
             </div>
         </div>

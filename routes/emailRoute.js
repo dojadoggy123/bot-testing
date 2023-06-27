@@ -1,18 +1,21 @@
 const express = require('express')
-const emailController = require('../controllers/emailController')
+const PVA_Controller = require('../controllers/PVA_Controller')
 const router = express.Router()
 
 // routes for email requests
 router.route('/email')    
-    .get(emailController.getEmail)
+    .get(PVA_Controller.getEmail)
 
 router.route('/email/:address')
-    .get(emailController.getEmailAdd)
-    .delete(emailController.deleteEmailAdd)
+    .get(PVA_Controller.getEmailAdd)
+    .delete(PVA_Controller.deleteEmailAdd)
 
 router.route('/email/OTP/:address')
-    .get(emailController.checkEmailAdd)   //Checks whether email address exists in db , & send OTP
-    .post(emailController.postEmailAdd)
+    .get(PVA_Controller.checkEmailAdd)   //Checks whether email address exists in db , & send OTP
+    .post(PVA_Controller.postEmailAdd)
+
+router.route('/transcript')
+    .post(PVA_Controller.postTranscript)
 
 
 module.exports = router

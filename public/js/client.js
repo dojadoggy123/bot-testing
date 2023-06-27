@@ -1,9 +1,19 @@
+
+const refreshButton = document.getElementById('refreshChatBot');
+const chatBotFrame = document.getElementById('chatBotFrame');
+
+refreshButton.addEventListener('click', () => {
+  console.log("i am trying to refresh")
+  chatBotFrame.src = chatBotFrame.src;
+});
+
+
 let data = {
     name: "john",
     id: "55kk99"
 };
 
-console.log(data);
+localStorage.setIten('john', 'cenaaaa')
 localStorage.setItem('user',JSON.stringify(data));
 
  

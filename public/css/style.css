@@ -8,12 +8,12 @@ h1{
 
 #B-bot{
     height: 25em;
-    width: 85%;
+    width: 100%;
 }
 
-img{
-    width: 30%;
-    height: 47%;
+
+button{
+    margin-top: 2em;
 }
 
 
