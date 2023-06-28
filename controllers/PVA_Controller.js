@@ -3,7 +3,7 @@ const otpGenerator = require('otp-generator')
 
 // initialize variables
 let OTP
-let user_content = []
+let contentArr
 
 // controller for email requests
 const getEmail = async (req, res)=>{
@@ -48,9 +48,10 @@ const postEmailAdd = async (req, res)=>{
         const {address} = req.params
         const {req_otp, req_name} = req.query
         console.log('------------------------------------------')
-        console.log("req_otp is "+req_otp)
+        console.log("req_otp is " + req_otp)
 
-        if (req_otp == OTP){    //verify user entered correct OTP
+        if (req_otp == OTP){ 
+            contentArr = []  // initialize empty array for user chat transcript
             const user = await userModel.create({"email": address, "name": req_name})    //create email in DB
             res.status(200).json({response: "your email has been created", 'user': user})
             // send session back to client after authenticated
@@ -83,8 +84,9 @@ const deleteEmailAdd = async (req, res)=>{
 const postTranscript = async (req, res)=>{
     try {
         const message = req.body
-        user_content.push(message)
-        res.json({"chat transcript": user_content})
+        // contentArr.forEach(()=> contentArrArr.pop())
+        contentArr.push(message)
+        res.json({"chat transcript": contentArr})
     } catch (error) {
         res.status(400).json(error.message)
     }

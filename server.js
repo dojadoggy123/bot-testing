@@ -10,6 +10,7 @@ app.set('view engine', 'ejs')
 // middlewares
 app.use(express.static('public'))
 app.use(express.json())  //accept json requests
+app.use(express.text())
 app.use(express.urlencoded({ extended: true }));    //allow complex object & array to be encoded. eg: nested arrays
 
 // app.use(
