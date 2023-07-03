@@ -1,19 +1,11 @@
-
-const refreshButton = document.getElementById('refreshChatBot');
-const chatBotFrame = document.getElementById('chatBotFrame');
-
-refreshButton.addEventListener('click', () => {
-  console.log("i am trying to refresh")
-  chatBotFrame.src = chatBotFrame.src;
-});
-
+const db = require("../../config/db");
 
 let data = {
-    name: "john",
-    id: "55kk99"
+    name: "bob",
+    id: "123abc"
 };
 
-localStorage.setIten('john', 'cenaaaa')
+localStorage.setItem('john', 'cenaaaa')
 localStorage.setItem('user',JSON.stringify(data));
 
  
@@ -32,8 +24,8 @@ const cookies = document.cookie;
 console.log(cookies)
 
 
-// pva_jopUEClWPD     (same user id for device, go check on other device)
-// pva_jopUEClWPD
-
-// local Storage
-// clientId: "96ff4394-9197-43aa-b393-6a41652e21f8"
+// Add an event listener to the button
+document.getElementById('chatbotButton').addEventListener('click', function() {
+  // Show the chatbot container
+  document.getElementById('chatbotContainer').style.display = 'block';
+});

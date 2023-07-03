@@ -1,5 +1,3 @@
-const userModel = require("../models/userModel")   // connect to database in userModel
-
 // controllers for home page requests
 
 const getHome = (req, res)=>{
