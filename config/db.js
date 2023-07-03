@@ -1,20 +1,24 @@
-const mysql = require('mysql2')
-const dotenv = require('dotenv').config()
+const {Pool} = require('pg')
+const dotenv = require('dotenv').config({path: '../.env'})
 
-// documentation - https://www.npmjs.com/package/mysql2
-
-const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
+const pool = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
 
-let sql = "SELECT * FROM chatbot_tb;"
+let sql = `
+INSERT INTO chatbot_tb (email, name, content)
+VALUES (
+ 'jak@email.com',
+ 'jak',
+);
+`
 
-pool.execute(sql, (err, res)=>{
+pool.query(sql, (err, res)=>{
     if (err) throw err
     console.log(res)
 })
 
-module.exports = pool.promise()
+module.exports = pool

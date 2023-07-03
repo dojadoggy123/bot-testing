@@ -8,7 +8,7 @@ router.route('/email')
     .post(PVA_Controller.postEmail)
 
 router.route('/transcript')
-    .put(PVA_Controller.putTranscript)
+    .post(PVA_Controller.postTranscript)
 
 router.route('/content')
     .put(PVA_Controller.putContent)

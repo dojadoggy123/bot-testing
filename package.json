@@ -10,6 +10,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.4.2",
     "otp-generator": "^4.0.1",
+    "pg": "^8.11.1",
     "sequelize": "^6.32.1"
   },
   "name": "tytiong",

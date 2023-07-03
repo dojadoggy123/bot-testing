@@ -1,12 +1,11 @@
 const express = require('express')
 const app = express()  //create express app
 const dotenv = require('dotenv').config()  //connect to envronment variables
-const cors = require('cors')
+const pool = require('./config/db.js')
 
 app.set('view engine', 'ejs')
 
 // middlewares
-app.use(cors)
 app.use(express.static('public'))
 app.use(express.json())  //accept json requests
 app.use(express.text())

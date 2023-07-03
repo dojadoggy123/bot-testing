@@ -30,20 +30,19 @@ const getEmail = async (req, res)=>{
 const postEmail = async (req, res)=>{
     try{
         const {email, name} = req.body
-        console.log('------------------------------------------')
-        console.log("req_otp is " + req_otp)
-
-        if (req_otp == OTP){ 
+        // console.log('------------------------------------------')
+        // console.log("req_otp is " + req_otp)
+        // if (req_otp == OTP){ 
             contentArr = []  // initialize empty array for user chat transcript
             let model = new botModel(email, name)
             model = await model.INSERT()
             res.json({response: "your email has been created", 'info': model})
 
             getOTP()   // resets OTP
-        }
-        else{
-            res.send("wrong OTP")
-        }
+        // }
+        // else{
+        //     res.send("wrong OTP")
+        // }
     }catch (error){
         res.status(400).json({message: error.message})
     }
@@ -60,9 +59,9 @@ const putContent = async (req, res)=>{
 }
 
 // update content array in db
-const putTranscript = async (req, res)=>{
+const postTranscript = async (req, res)=>{
     try {
-        botModel.UPDATE(contentArr) 
+        await botModel.UPDATE(contentArr) 
         res.status(200).send(model)
     } catch (error) {
         res.status(400).json({message: error.message})
@@ -80,5 +79,5 @@ module.exports = {
     getEmail,
     postEmail,
     putContent,
-    putTranscript    
+    postTranscript    
 }
