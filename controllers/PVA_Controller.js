@@ -9,19 +9,17 @@ let contentArr
 const getEmail = async (req, res)=>{
     try {
         const email = req.query.email
-        console.log("SELECT_EXIXTS RETURNS A VALUE OF: " + SELECT_EXISTS(email))
         // check if email address already exists in db
-        await botModel.SELECT_EXISTS(email).then(res =>{
-            if (res==1){
-                contentArr = []   
+        await botModel.SELECT_EXISTS(email).then(output =>{
+            if (output == 1){
+                contentArr = []  
                 res.json({"exists": true, "OTP": null})
             }else{
                 res.json({"exists": false, "OTP": getOTP()})   //send OTP to validate email address
                 console.log("global var from getEmail is " + OTP)
             }
         })
-    }
-    catch (error) {
+    }catch (error) {
         res.status(400).json({message: error.message})
     }
 }
@@ -50,10 +48,12 @@ const postEmail = async (req, res)=>{
 }
 
 // add user's messages into content array
-const putContent = async (req, res)=>{
+const postContent = async (req, res)=>{
     try {
-        const message = req.body
+        const message = req.body.message
+        console.log(contentArr)
         contentArr.push(message)
+        res.json("user messages haqs been added to an array")
     } catch (error) {
         res.json({error: error.message})
     }
@@ -61,9 +61,15 @@ const putContent = async (req, res)=>{
 
 // update content array in db
 const putTranscript = async (req, res)=>{
+    const exists = req.body.exists
     try {
-        botModel.UPDATE(contentArr) 
-        res.status(200).send(model)
+        if (exists == "true"){
+            botModel.UPDATE(contentArr) 
+            res.status(200).send("user messages has been updated in database "+ contentArr)
+        }
+        else{
+            res.end()
+        }
     } catch (error) {
         res.status(400).json({message: error.message})
     }
@@ -79,6 +85,6 @@ function getOTP(){
 module.exports = {
     getEmail,
     postEmail,
-    putContent,
+    postContent,
     putTranscript    
 }

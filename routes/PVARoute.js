@@ -11,7 +11,7 @@ router.route('/transcript')
     .put(PVA_Controller.putTranscript)
 
 router.route('/content')
-    .put(PVA_Controller.putContent)
+    .post(PVA_Controller.postContent)
 
     
 module.exports = router

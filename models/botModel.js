@@ -20,7 +20,7 @@ class botModel{
        return res
     }
 
-    static SELECT_EXISTS(email) {
+    static async SELECT_EXISTS(email) {
         let sql = `
         SELECT EXISTS (
             SELECT 1
@@ -28,14 +28,21 @@ class botModel{
             WHERE email = '${email}'
         ) AS value_exists;
         `
-        return db.execute(sql)[0]
+        try {
+            const [rows] = await db.execute(sql)
+            const valueExists = rows[0].value_exists
+            return valueExists
+        } catch (error) {
+            throw error
         }
+    }
 
     static UPDATE(contentArr) {
         let sql = `
         UPDATE chatbot_tb
-        SET content = '${contentArr}'
-        WHERE email = ${this.email};`
+        SET content = "${contentArr}"
+        WHERE email = "${this.email}";`
+        db.execute(sql)
     }
 }
 
@@ -43,31 +50,3 @@ module.exports = botModel
 
 
 
-
-
-// const {DataTypes} = require('sequelize')
-
-// const userModel = sequelize.define('userModel',{
-//     conversation_id: {
-//         type: DataTypes.STRING,
-//         allowNull: true,
-//         defaultValue: nullull
-//     },
-//     email: {
-//         type: DataTypes.STRING,
-//         allowNull: false,
-//         defaultValue: null
-//     },
-//     name:{
-//         type: DataTypes.STRING,
-//         allowNull: true,
-//         defaultValue: null
-//     },
-//     content: {
-//         type: DataTypes.ARRAY,
-//         allowNull: true,
-//         defaultValue: null
-//     }
-// })
-
-// module.exports = userModel;
