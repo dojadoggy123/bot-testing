@@ -1,6 +1,7 @@
 // controllers for home page requests
 
 const getHome = (req, res)=>{
+    console.log("successfully hosted website")
     res.render("homeView", {text: "*this is a variable being rendered"})
 }
 
