@@ -1,5 +1,3 @@
-const db = require("../../config/db");
-
 let data = {
     name: "bob",
     id: "123abc"

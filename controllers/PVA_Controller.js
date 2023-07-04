@@ -29,7 +29,7 @@ const getEmail = async (req, res)=>{
 // adds user email and name into db
 const postEmail = async (req, res)=>{
     try{
-        const {email, name} = req.body
+        const {req_otp, email, name} = req.body
         console.log('------------------------------------------')
         console.log("req_otp is " + req_otp)
 
