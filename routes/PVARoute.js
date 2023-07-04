@@ -7,11 +7,12 @@ router.route('/email')
     .get(PVA_Controller.getEmail)       //Checks whether email address exists in db , & send OTP
     .post(PVA_Controller.postEmail)
 
+router.route('/content')
+    .post(PVA_Controller.postContent)
+
 router.route('/transcript')
     .put(PVA_Controller.putTranscript)
 
-router.route('/content')
-    .post(PVA_Controller.postContent)
 
     
 module.exports = router
