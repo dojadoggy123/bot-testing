@@ -6,6 +6,7 @@ class botModel{
         this.name = name
         this.content = content
     }
+
     // insert values into sql db
     async INSERT() {
        let sql = `
@@ -37,12 +38,19 @@ class botModel{
         }
     }
 
-    static UPDATE(contentArr) {
+    async UPDATE(contentArr) {
         let sql = `
         UPDATE chatbot_tb
         SET content = "${contentArr}"
         WHERE email = "${this.email}";`
-        db.execute(sql)
+        
+        try{
+            console.log("this email gives: "+this.email)
+            await db.execute(sql)
+        }
+        catch(error){
+            throw new Error(error.message)
+        }
     }
 }
 

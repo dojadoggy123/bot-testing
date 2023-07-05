@@ -55,7 +55,7 @@ const postContent = async (req, res)=>{
 // update content array in db
 const putTranscript = async (req, res)=>{
     try {
-        botModel.UPDATE(contentArr) 
+        await model.UPDATE(contentArr) 
         res.status(200).send("this.email gives us: "+ model.email + "user messages has been updated in database "+ contentArr)
     } catch (error) {
         res.status(400).json({error: error.message})
