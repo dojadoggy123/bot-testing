@@ -74,10 +74,9 @@ async function createUser(email, name){
         contentArr = []  // initialize empty array for user chat transcript
         model = new botModel(email, name)
         model = await model.INSERT()
-        res.json({response: "your email has been created", 'info': model})
     }
     catch(error){
-        res.status(400).json({error: error.message})
+        throw new Error(error.message)
     }
 }
 
