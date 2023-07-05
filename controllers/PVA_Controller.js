@@ -9,11 +9,11 @@ let model
 // controller for email requests
 const postEmail = async (req, res)=>{
     try {
-        const {email, name} = req.body
+        const {id, email, name} = req.body
         // check if email address already exists in db
         await botModel.SELECT_EXISTS(email).then(output =>{
             if (output == 1){
-                createUser(email, name)
+                createUser(id, email, name)
                 res.json({"exists": "yes", "OTP": "null"})
             }else{
                 res.json({"exists": "no", "OTP": getOTP()})   //send OTP to validate email address
@@ -27,10 +27,10 @@ const postEmail = async (req, res)=>{
 // adds user email and name into db
 const postNewEmail = async (req, res)=>{
     try{
-        const {req_otp, email, name} = req.body
+        const {req_otp, id, email, name} = req.body
 
         if (req_otp == OTP){ 
-            createUser(email, name)
+            createUser(id, email, name)
             getOTP()   // resets OTP
         }
         else{
@@ -69,10 +69,10 @@ function getOTP(){
     return OTP
 }
 
-async function createUser(email, name){
+async function createUser(id, email, name){
     try{
         contentArr = []  // initialize empty array for user chat transcript
-        model = new botModel(email, name)
+        model = new botModel(id, email, name)
         await model.INSERT()
     }
     catch(error){
