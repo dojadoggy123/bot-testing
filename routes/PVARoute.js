@@ -4,8 +4,10 @@ const router = express.Router()
 
 // routes for email requests
 router.route('/email')    
-    .get(PVA_Controller.getEmail)       //Checks whether email address exists in db , & send OTP
-    .post(PVA_Controller.postEmail)
+    .post(PVA_Controller.postEmail)       //Checks whether email address exists in db , & send OTP
+
+router.route('/new_email')
+    .post(PVA_Controller.postNewEmail)
 
 router.route('/content')
     .post(PVA_Controller.postContent)

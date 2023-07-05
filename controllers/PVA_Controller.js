@@ -6,13 +6,13 @@ let OTP
 let contentArr
 
 // controller for email requests
-const getEmail = async (req, res)=>{
+const postEmail = async (req, res)=>{
     try {
-        const email = req.query.email
+        const {email, name} = req.body
         // check if email address already exists in db
         await botModel.SELECT_EXISTS(email).then(output =>{
             if (output == 1){
-                contentArr = []  
+                createUser(email, name)
                 res.json({"exists": "yes", "OTP": "null"})
             }else{
                 res.json({"exists": "no", "OTP": getOTP()})   //send OTP to validate email address
@@ -24,16 +24,12 @@ const getEmail = async (req, res)=>{
 }
 
 // adds user email and name into db
-const postEmail = async (req, res)=>{
+const postNewEmail = async (req, res)=>{
     try{
         const {req_otp, email, name} = req.body
 
         if (req_otp == OTP){ 
-            contentArr = []  // initialize empty array for user chat transcript
-            let model = new botModel(email, name)
-            model = await model.INSERT()
-            res.json({response: "your email has been created", 'info': model})
-
+            createUser(email, name)
             getOTP()   // resets OTP
         }
         else{
@@ -49,7 +45,7 @@ const postContent = async (req, res)=>{
     try {
         const message = req.body.message
         contentArr.push(message)
-        res.json("user messages haqs been added to an array")
+        res.json("user messages has been added to an array")
     } catch (error) {
         res.json({error: error.message})
     }
@@ -72,9 +68,17 @@ function getOTP(){
     return OTP
 }
 
+async function createUser(email, name){
+    contentArr = []  // initialize empty array for user chat transcript
+    let model = new botModel(email, name)
+    model = await model.INSERT()
+    res.json({response: "your email has been created", 'info': model})
+}
+
+
 module.exports = {
-    getEmail,
     postEmail,
+    postNewEmail,
     postContent,
     putTranscript    
 }
