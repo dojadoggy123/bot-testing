@@ -35,7 +35,7 @@ const postNewEmail = async (req, res)=>{
             getOTP()   // resets OTP
         }
         else{
-            res.status(200).json("wrong OTP")
+            res.status(400).json("wrong OTP")
         }
     }catch (error){
         res.status(400).json({message: error.message})
@@ -46,7 +46,7 @@ const postNewEmail = async (req, res)=>{
 const postContent = async (req, res)=>{
     try {
         const message = req.body.message
-        contentArr.push(message)
+        contentArr.push(" " + message)
         res.json("user messages has been added to an array")
     } catch (error) {
         res.json({error: error.message})
