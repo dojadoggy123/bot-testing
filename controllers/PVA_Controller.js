@@ -73,7 +73,7 @@ async function createUser(email, name){
     try{
         contentArr = []  // initialize empty array for user chat transcript
         model = new botModel(email, name)
-        model = await model.INSERT()
+        await model.INSERT()
     }
     catch(error){
         throw new Error(error.message)
