@@ -13,10 +13,9 @@ const getEmail = async (req, res)=>{
         await botModel.SELECT_EXISTS(email).then(output =>{
             if (output == 1){
                 contentArr = []  
-                res.json({"exists": true, "OTP": null})
+                res.json({"exists": true, "OTP": "null"})
             }else{
                 res.json({"exists": false, "OTP": getOTP()})   //send OTP to validate email address
-                console.log("global var from getEmail is " + OTP)
             }
         })
     }catch (error) {
@@ -28,8 +27,6 @@ const getEmail = async (req, res)=>{
 const postEmail = async (req, res)=>{
     try{
         const {req_otp, email, name} = req.body
-        console.log('------------------------------------------')
-        console.log("req_otp is " + req_otp)
 
         if (req_otp == OTP){ 
             contentArr = []  // initialize empty array for user chat transcript
@@ -51,7 +48,6 @@ const postEmail = async (req, res)=>{
 const postContent = async (req, res)=>{
     try {
         const message = req.body.message
-        console.log(contentArr)
         contentArr.push(message)
         res.json("user messages haqs been added to an array")
     } catch (error) {
@@ -61,15 +57,9 @@ const postContent = async (req, res)=>{
 
 // update content array in db
 const putTranscript = async (req, res)=>{
-    const exists = req.body.exists
     try {
-        if (exists == "true"){
-            botModel.UPDATE(contentArr) 
-            res.status(200).send("user messages has been updated in database "+ contentArr)
-        }
-        else{
-            res.end()
-        }
+        botModel.UPDATE(contentArr) 
+        res.status(200).send("user messages has been updated in database "+ contentArr)
     } catch (error) {
         res.status(400).json({message: error.message})
     }
