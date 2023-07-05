@@ -35,7 +35,7 @@ const postNewEmail = async (req, res)=>{
             getOTP()   // resets OTP
         }
         else{
-            res.status(400).json("wrong OTP")
+            res.status(200).json("wrong OTP")
         }
     }catch (error){
         res.status(400).json({message: error.message})
