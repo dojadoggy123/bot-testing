@@ -13,9 +13,9 @@ const getEmail = async (req, res)=>{
         await botModel.SELECT_EXISTS(email).then(output =>{
             if (output == 1){
                 contentArr = []  
-                res.json({"exists": true, "OTP": "null"})
+                res.json({"exists": "true", "OTP": "null"})
             }else{
-                res.json({"exists": false, "OTP": getOTP()})   //send OTP to validate email address
+                res.json({"exists": "true", "OTP": getOTP()})   //send OTP to validate email address
             }
         })
     }catch (error) {
