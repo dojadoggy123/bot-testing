@@ -11,7 +11,7 @@ class botModel{
     // insert values into sql db
     async INSERT() {
        let sql = `
-       INSERT INTO chatbot_tb (id, email, name, content)
+       INSERT INTO chatbot_tb (conversation_id, email, name, content)
        VALUES (
         '${this.id}',
         '${this.email}',
@@ -44,7 +44,7 @@ class botModel{
         let sql = `
         UPDATE chatbot_tb
         SET content = "${contentArr}"
-        WHERE email = "${this.id}";`
+        WHERE conversation_id = "${this.id}";`
         
         try{
             console.log("this id gives: "+this.id)
