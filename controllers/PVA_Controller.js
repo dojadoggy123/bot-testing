@@ -4,6 +4,7 @@ const otpGenerator = require('otp-generator')
 // initialize variables
 let OTP
 let contentArr
+let model
 
 // controller for email requests
 const postEmail = async (req, res)=>{
@@ -57,7 +58,7 @@ const putTranscript = async (req, res)=>{
         botModel.UPDATE(contentArr) 
         res.status(200).send("user messages has been updated in database "+ contentArr)
     } catch (error) {
-        res.status(400).json({message: error.message})
+        res.status(400).json({error: error.message})
     }
 }
 
@@ -69,10 +70,15 @@ function getOTP(){
 }
 
 async function createUser(email, name){
-    contentArr = []  // initialize empty array for user chat transcript
-    let model = new botModel(email, name)
-    model = await model.INSERT()
-    res.json({response: "your email has been created", 'info': model})
+    try{
+        contentArr = []  // initialize empty array for user chat transcript
+        model = new botModel(email, name)
+        model = await model.INSERT()
+        res.json({response: "your email has been created", 'info': model})
+    }
+    catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 
