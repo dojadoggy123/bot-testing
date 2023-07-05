@@ -31,10 +31,11 @@ const postNewEmail = async (req, res)=>{
 
         if (req_otp == OTP){ 
             createUser(id, email, name)
+            res.status(200).json("new user has been created in the db")
             getOTP()   // resets OTP
         }
         else{
-            res.send("wrong OTP")
+            res.status(400).json("wrong OTP")
         }
     }catch (error){
         res.status(400).json({message: error.message})
