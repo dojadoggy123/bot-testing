@@ -47,7 +47,6 @@ class botModel{
         WHERE conversation_id = "${this.id}";`
         
         try{
-            console.log("this id gives: "+this.id)
             await db.execute(sql)
         }
         catch(error){
