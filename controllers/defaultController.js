@@ -1,6 +1,7 @@
 // controllers for home page requests
 
 const getHome = (req, res)=>{
+    res.cookie('info', {name: 'cookie monsta n friends'})
     res.render("homeView", {text: "*this is a variable being rendered"})
 }
 

@@ -63,7 +63,6 @@ const putTranscript = async (req, res)=>{
     }
 }
 
-
 // function to generate OTP 
 function getOTP(){
     OTP = otpGenerator.generate(6, {upperCaseAlphabets: true, specialChars: false})
