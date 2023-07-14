@@ -55,18 +55,18 @@ class botModel {
     }
   }
 
-    static async UPDATE_CONTENT(id, message) {
-        let sql = `
-        UPDATE chatbot_tb
-        SET content = CONCAT(content, '${message}, ')
-        WHERE conversation_id = "${id} AND active = "yes";`
-        try{
-            await db.execute(sql)
-        }
-        catch(error){
-            throw new Error(error.message)
-        }
+  static async UPDATE_CONTENT(id, message) {
+    let sql = `
+    UPDATE chatbot_tb
+    SET content = CONCAT(content, '${message}, ')
+    WHERE conversation_id = "${id}" AND active = "yes";`
+    try{
+      await db.execute(sql)
     }
+    catch(error){
+      throw new Error(error.message)
+    }
+}
 }
 
 module.exports = botModel
