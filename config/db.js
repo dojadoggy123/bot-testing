@@ -1,10 +1,10 @@
 const mysql = require('mysql2')
 const dotenv = require('dotenv').config()
-const jwt = require('jsonwebtoken')
 
 // documentation - https://www.npmjs.com/package/mysql2
 
 const pool = mysql.createPool({
+    connectionLimit: 10,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     database: process.env.DB_NAME,

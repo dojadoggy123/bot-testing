@@ -5,16 +5,10 @@ const router = express.Router()
 // routes for email requests
 router.route('/email')    
     .post(PVA_Controller.postEmail)       //Checks whether email address exists in db , & send OTP
-
-router.route('/new_email')
-    .post(PVA_Controller.postNewEmail)
+    .put(PVA_Controller.putEmail)
 
 router.route('/content')
-    .post(PVA_Controller.postContent)
-
-router.route('/transcript')
-    .put(PVA_Controller.putTranscript)
-
+    .post(PVA_Controller.putContent)
 
     
 module.exports = router

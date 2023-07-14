@@ -7,8 +7,7 @@ app.set('view engine', 'ejs')
 // middlewares
 app.use(express.static('public'))
 app.use(express.json())  //accept json requests
-app.use(express.text())
-app.use(express.urlencoded({ extended: true }));   
+app.use(express.urlencoded({ extended: true }))
 
 // set root route to router
 app.use('/', require('./routes/defaultRoute'))
@@ -25,5 +24,24 @@ try {
     console.log(error)
 }
 
- 
+
+// const jwt = require('jsonwebtoken');
+
+// function authenticateToken(req, res, next) {
+//   const authHeader = req.headers['authorization'];
+//   const token = authHeader && authHeader.split(' ')[1];
+
+//   if (token == null) return res.sendStatus(401);
+
+//   jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+//     console.log(err);
+
+//     if (err) return res.sendStatus(403);
+
+//     req.user = user;
+
+//     next();
+//   });
+// }
+
 
